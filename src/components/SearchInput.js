@@ -2,7 +2,7 @@ import React from "react";
 
 function SearchInput() {
   return (
-    <div class="col-lg-3 mx-auto input-group input-group-lg">
+    <div class="p-5 col-lg-3 mx-auto input-group input-group-lg">
       <div class="input-group-prepend">
         <span
           class="input-group-text bg-primary text-light"
