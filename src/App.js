@@ -28,13 +28,26 @@ class App extends Component {
     });
   };
 
+  handleFormSubmit = (event) => {
+    const emps = [...this.state.employees];
+    emps.sort((a, b) => a.dob.age - b.dob.age);
+    this.setState({ employees: emps });
+  };
+
   render() {
     console.log(this.state);
     return (
       <div>
         <Jumbotron />
-        <SearchInput />
-        <EmployeeTable />
+        <SearchInput
+          handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
+        />
+        <EmployeeTable
+          employees={this.state.employees}
+          search={this.state.search}
+          handleFormSubmit={this.handleFormSubmit}
+        />
       </div>
     );
   }

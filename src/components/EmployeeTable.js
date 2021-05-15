@@ -1,8 +1,8 @@
 import React from "react";
 
-function Jumbotron() {
+function Jumbotron(props) {
   return (
-    <div class="container-fluid ">
+    <div className="container-fluid ">
       <table className="m-4 table mx-auto">
         <thead className="thead-dark">
           <tr>
@@ -11,37 +11,30 @@ function Jumbotron() {
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
             <th scope="col">DOB</th>
+            <th scope="col" onClick={props.handleFormSubmit}>
+              Age
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">PHOTO</th>
-            <td>Otto</td>
-            <td>503-543-5216</td>
-            <td>otto@gmail.com</td>
-            <td>05/07/1991</td>
-          </tr>
-          <tr>
-            <th scope="row">PHOTO</th>
-            <td>Jacob</td>
-            <td>654-622-1145</td>
-            <td>jacob@gmail.com</td>
-            <td>07/01/2000</td>
-          </tr>
-          <tr>
-            <th scope="row">PHOTO</th>
-            <td>Ana</td>
-            <td>958-425-1267</td>
-            <td>ana@gmail.com</td>
-            <td>11/06/1995</td>
-          </tr>
-          <tr>
-            <th scope="row">PHOTO</th>
-            <td>Brice</td>
-            <td>777-858-5567</td>
-            <td>brice@gmail.com</td>
-            <td>01/01/1998</td>
-          </tr>
+          {props.employees
+            ?.filter((employee) =>
+              `${employee.name.first} ${employee.name.last}`
+                .toUpperCase()
+                .includes(props.search.toUpperCase())
+            )
+            .map((employee, i) => (
+              <tr>
+                <th scope="row">
+                  <img src={employee.picture.medium} alt={"employee" + i}></img>
+                </th>
+                <td>{`${employee.name.first} ${employee.name.last}`}</td>
+                <td>{employee.cell}</td>
+                <td>{employee.email}</td>
+                <td>{new Date(employee.dob.date).toLocaleDateString()}</td>
+                <td>{employee.dob.age}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
